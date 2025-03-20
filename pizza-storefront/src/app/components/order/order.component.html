@@ -1,12 +1,18 @@
 <h1>Orders for {{ email }}</h1>
 
-<ul>
-    @for (order of orders; track order.orderId) {
-    <li>
-      <p>Order Id: {{ order.orderId }}</p>
-      <p>{{ order.amount | currency: 'SGD' }}</p>
-    </li>
-    } @empty {
-    <li>You have not made any orders</li>
-    }
-</ul>
+<!--<ul>-->
+<!--    @if (orders | async; as orderList) {-->
+<!--    @for (order of orderList; track order.orderId) {-->
+<!--    <li>-->
+<!--        <p>Order Id: {{ order.orderId }}</p>-->
+<!--        <p>{{ order.amount | currency: 'SGD' }}</p>-->
+<!--    </li>-->
+<!--    } @empty {-->
+<!--    <li>You have not made any orders</li>-->
+<!--    }-->
+<!--    } @else {-->
+<!--    <li>Loading orders...</li>-->
+<!--    }-->
+<!--</ul>-->
+
+<button [routerLink]="['/']">Back to Home</button>

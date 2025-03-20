@@ -14,7 +14,7 @@
         <td> <label for="email">Email:</label> </td>
         <td>
           <input type="email" size="50" id="email" placeholder="Your LumiNUS email" formControlName="email">
-          <button type="button" class="ml-10px" [routerLink]="['orders/:email']" [disabled]="!form.get('email')?.value">
+          <button type="button" class="ml-10px" (click)="navigateToOrderList()" [disabled]="!form.get('email')?.value">
             List Orders
           </button>
         </td>

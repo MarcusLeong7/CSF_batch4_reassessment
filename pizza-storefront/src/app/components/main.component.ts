@@ -101,6 +101,11 @@ export class MainComponent implements OnInit {
         }
     }
 
+    navigateToOrderList(){
+        const email: string = this.form.value.email;
+        this.router.navigate(['/orders', email]);
+    }
+
 
     updateSize(size: string
     ) {
