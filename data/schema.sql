@@ -13,3 +13,12 @@ create table orders (
 	constraint pk_order_id primary key(order_id)
 
 );
+
+select * from orders;
+
+select * from orders where email='boo@gmail.com';
+
+SELECT order_id, order_date, total_amount FROM orders WHERE email='boo@gmail.com';
+
+grant all privileges on pizza_factory.* to 'fred'@'%';
+flush privileges;
