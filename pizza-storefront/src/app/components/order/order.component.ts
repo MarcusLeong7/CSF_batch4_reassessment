@@ -21,6 +21,7 @@ export class OrderComponent implements OnInit {
 
   ngOnInit(): void {
     this.email = this.activatedRoute.snapshot.params['email'];
+    console.log(this.email);
     this.orders = this.pizzaSvc.getOrders(this.email);
   }
 

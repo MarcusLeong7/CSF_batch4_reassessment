@@ -24,7 +24,7 @@ export class PizzaService {
   // TODO Task 3 - You are free to add additional parameters to this method
   // Do not change the return type
   getOrders(email:string): Promise<OrderSummary[]> {
-    return lastValueFrom(this.http.get<OrderSummary[]>(`/api/orders/${email}/all`));
+    return lastValueFrom(this.http.get<OrderSummary[]>(`/api/order/${email}/all`));
   }
 
   /*  export interface OrderSummary {
