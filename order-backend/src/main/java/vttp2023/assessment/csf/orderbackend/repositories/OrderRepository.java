@@ -34,7 +34,7 @@ public class OrderRepository {
     }
 
     // TODO Task 7
-    public List<OrderSummary> getOrders (String email){
+    public List<OrderSummary> getOrders(String email) {
         SqlRowSet rs = template.queryForRowSet(SQL_GET_ORDERS, email);
         List<OrderSummary> orders = new ArrayList<>();
 
@@ -43,11 +43,15 @@ public class OrderRepository {
             summary.setOrderId(rs.getInt("order_id"));
             summary.setName(rs.getString("name"));
             summary.setEmail(rs.getString("email"));
-            summary.setAmount(rs.getFloat("amount"));
+            // Amount will be calculated and added in service layer
             orders.add(summary);
         }
-
-        return null;
+        return orders;
     }
 
+    // Helper Method
+    public String getPizzaIdForOrder(Integer orderId) {
+        String sql = "SELECT pizza_id FROM orders WHERE order_id = ?";
+        return template.queryForObject(sql, String.class, orderId);
+    }
 }

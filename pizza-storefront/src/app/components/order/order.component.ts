@@ -24,4 +24,6 @@ export class OrderComponent implements OnInit {
     this.orders = this.pizzaSvc.getOrders(this.email);
   }
 
+
+
 }

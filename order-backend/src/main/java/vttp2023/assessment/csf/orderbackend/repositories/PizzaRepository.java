@@ -44,7 +44,9 @@ public class PizzaRepository {
 	// Write the native MongoDB statement in the commend below. Marks will be 
 	// give for the native MongoDB statement
 	/*
-	 * Native MongoDB statement here
-	 * 
+	 db.pizza.find({ _id: "f78bd975" })
 	 */
+	public Document getPizza(String pizzaId) {
+		return template.findById(pizzaId, Document.class, "pizza");
+	}
 }
