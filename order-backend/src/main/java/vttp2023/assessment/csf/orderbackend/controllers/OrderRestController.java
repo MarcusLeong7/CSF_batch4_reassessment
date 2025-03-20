@@ -7,8 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import vttp2023.assessment.csf.orderbackend.models.Order;
 import vttp2023.assessment.csf.orderbackend.services.OrderService;
 
@@ -20,10 +19,14 @@ public class OrderRestController {
     private OrderService orderSvc;
 
     // TODO Task 6
+    @PostMapping(path="/order", consumes = MediaType.APPLICATION_JSON_VALUE,
+    produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
     public ResponseEntity<String> postOrder(@RequestBody Order order) {
         try {
             // Process the order by calling the service
             orderSvc.createOrder(order);
+            System.out.println("Order created: " + order);
             // Create success response with order ID
             JsonObject resp = Json.createObjectBuilder()
                     .add("orderId", order.getOrderId())
@@ -47,7 +50,9 @@ public class OrderRestController {
 
 
     // TODO Task 7
-    public ResponseEntity<String> getOrderAll() {
+    @GetMapping(path="/api/order/{email}/all",
+    produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<String> getOrderAll(@PathVariable String email) {
 
         return null;
     }

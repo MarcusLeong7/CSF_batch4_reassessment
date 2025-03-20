@@ -28,7 +28,9 @@ public class OrderService {
 		Random random = new Random();
 		// +1 to start from 1-99999999
 		Integer intOrderId = random.nextInt(99999999) + 1;
-		String orderId = intOrderId.toString();
+		order.setOrderId(intOrderId);
+
+		String orderId = intOrderId.toString(); // To return String type
 
 		String pizzaId = UUID.randomUUID().toString().substring(0, 8);
 
@@ -38,6 +40,12 @@ public class OrderService {
 		// Return the order_id 
 		return orderId;
 	}
+
+	/*
+	private Integer orderId;  - SQL
+	private String name;	- SQL
+	private String email; - SQL
+	private Float amount;*/
 
 	// TODO: Task 7 Use this method to get a list of all the orders
 	// DO NOT MODIFY THE SIGNATURE OF THIS METHOD. You may only add thrown exceptions

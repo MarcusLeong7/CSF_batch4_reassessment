@@ -35,6 +35,8 @@ public class PizzaRepository {
 		doc.put("toppings", order.getToppings());
 		doc.put("comments", order.getComments());
 
+		System.out.println("Pizza created");
+
 		template.save(doc,"pizza");
 	}
 
