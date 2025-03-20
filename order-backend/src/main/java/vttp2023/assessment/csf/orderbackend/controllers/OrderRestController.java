@@ -55,7 +55,7 @@ public class OrderRestController {
 
 
     // TODO Task 7
-    @GetMapping(path = "/api/order/{email}/all",
+    @GetMapping(path = "/order/{email}/all",
             produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<String> getOrderAll(@PathVariable String email) {
 

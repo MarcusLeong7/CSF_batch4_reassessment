@@ -59,13 +59,24 @@ public class OrderService {
 
 		// For each order, get the pizza_id and calculate the amount
 		for (OrderSummary summary : orderSummaries) {
-			// Get the pizza_id for this order
-			String pizzaId = orderRepo.getPizzaIdForOrder(summary.getOrderId());
-			// Calculate the amount based on pizza details
-			Float amount = calculateAmount(pizzaId);
+			try {
+				// Get the pizza_id for this order
+				String pizzaId = orderRepo.getPizzaIdForOrder(summary.getOrderId());
+				if (pizzaId == null) {
+					System.err.println("No pizza ID found for order: " + summary.getOrderId());
+					summary.setAmount(0.0f);
+					continue;
+				}
+				// Calculate the amount based on pizza details
+				Float amount = calculateAmount(pizzaId);
 
-			// Set the calculated amount
-			summary.setAmount(amount);
+				// Set the calculated amount
+				summary.setAmount(amount);
+			} catch (Exception e) {
+				System.err.println("Error calculating amount for order: " + summary.getOrderId());
+				e.printStackTrace();
+				summary.setAmount(0.0f);
+			}
 		}
 
 		return orderSummaries;
@@ -85,7 +96,26 @@ public class OrderService {
 		Float totalAmount = 0.0f;
 		// Calculate base price by size
 		Integer size = pizza.getInteger("size");
-		totalAmount += pricingService.size(size);
+		// Map from pizza size to array index
+		int sizeIndex;
+		switch (size) {
+			case 6:  // Personal - 6 inches
+				sizeIndex = 0;
+				break;
+			case 9:  // Regular - 9 inches
+				sizeIndex = 1;
+				break;
+			case 12: // Large - 12 inches
+				sizeIndex = 2;
+				break;
+			case 15: // Extra Large - 15 inches
+				sizeIndex = 3;
+				break;
+			default:
+				System.err.println("Unknown pizza size: " + size + " for pizza ID: " + pizzaId);
+				sizeIndex = 0; // Default to smallest
+		}
+		totalAmount += pricingService.size(sizeIndex);
 		// Add price for crust type
 		Boolean thickCrust = pizza.getBoolean("thickCrust");
 		if (thickCrust) {
